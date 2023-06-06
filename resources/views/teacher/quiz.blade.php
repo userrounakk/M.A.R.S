@@ -101,25 +101,37 @@
                                                 <div class="h6"><label for="sub"
                                                         class="form-label ">Subject</label>
                                                 </div>
-                                                <input type="text" id="sub" class="form-control mb-3">
+                                                <input type="text" id="sub" class="form-control mb-3"
+                                                    name="title" value="{{ $quiz->title }}">
                                                 <div class="h6"><label for="description"
                                                         class="form-label ">Description</label></div>
-                                                <input type="text" id="description" class="form-control mb-3">
+                                                <input type="text" id="description" class="form-control mb-3"
+                                                    name="description" value="{{ $quiz->description }}">
                                                 <div class="h6"><label for="type" class="form-label">Quiz
                                                         type</label></div>
                                                 <fieldset class="form-group mb-3">
                                                     <select class="form-select" id="basicSelect">
-                                                        <option>Objective</option>
-                                                        <option>Subjective</option>
+                                                        <option @if ($quiz->type == 'objective') 'selected' @endif>
+                                                            Objective</option>
+                                                        <option @if ($quiz->type == 'subjective') 'selected' @endif>
+                                                            Subjective
+                                                        </option>
                                                     </select>
                                                 </fieldset>
                                                 <div class="h6"><label for="type" class="form-label">Quiz
                                                         type</label></div>
                                                 <fieldset class="form-group mb-3">
                                                     <select class="form-select" id="basicEdit">
-                                                        <option>Draft</option>
-                                                        <option>Published</option>
-                                                        <option>Completed</option>
+                                                        <option value="completed"
+                                                            @if ($quiz->status == 'completed') 'selected' @endif>
+                                                            Completed</option>
+                                                        <option value="draft"
+                                                            @if ($quiz->status == 'draft') 'selected' @endif>
+                                                            Draft</option>
+                                                        <option value="published"
+                                                            @if ($quiz->status == 'published') 'selected' @endif>
+                                                            Published</option>
+
                                                     </select>
                                                 </fieldset>
                                             </form>
