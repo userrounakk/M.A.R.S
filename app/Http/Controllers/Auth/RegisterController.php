@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AllowedEmail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Exception;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -67,6 +70,14 @@ class RegisterController extends Controller
     {
         if (count(User::all()) == 0) {
             $role = 'admin';
+        } else {
+            $user = AllowedEmail::where('email', $data['email'])->first();
+            if (!$user) {
+                throw ValidationException::withMessages([
+                    'email' => ['The provided email does not exist in our record.'],
+                ]);
+            }
+            $role = $user->role;
         }
         return User::create([
             'name' => $data['name'],
