@@ -52,11 +52,11 @@
                                 <td class="align-middle">
                                     <a href="/allowedemails/{{ $allowed_user->id }}/edit"
                                         class="btn btn-outline-warning btn-sm mt-1"><i class="bi bi-pencil-square"></i></a>
-                                    <form class='d-inline' action="/users/allowed/{{ $allowed_user->id }}" method="post">
+                                    <form class='d-inline' action="/allowedemails/{{ $allowed_user->id }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button class="btn-sm mt-1 btn-outline-danger btn"
-                                            onclick="return confirm('Are you sure you want to remove {{ $allowed_user->name }}?')"><i
+                                            onclick="return confirm('Are you sure you want to remove {{ $allowed_user->email }}?')"><i
                                                 class="bi bi-trash"></i></i></button>
                                     </form>
                                 </td>

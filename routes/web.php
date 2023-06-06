@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AllowedEmailController;
+use App\Http\Controllers\QuizController;
 use App\Models\AllowedEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::group(
     ['middleware' => 'check'],
     function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::resource('/quiz', QuizController::class);
         Route::group(
             ['middleware' => 'admin'],
             function () {
